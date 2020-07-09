@@ -1,15 +1,10 @@
 import React from "react";
 import './styles.css';
-import DashboardMenu from "../../components/DashboardMenu";
+import DashboardMenu from "../../components/Dashboard/Menu";
 
 function DashboardPage() {
     return (
         <>
-            <header className='header'>
-                <h2>
-                    Dashboard
-                </h2>
-            </header>
             <DashboardMenu/>
         </>
     );
