@@ -6,11 +6,15 @@ import MainPage from "./pages/MainPage";
 function App() {
   return (
     <BrowserRouter>
-        <Switch>
-            <Route exact path='/'>
-                <MainPage/>
-            </Route>
-        </Switch>
+        <div className="App">
+            <div className="App-header">
+                <Switch>
+                    <Route exact path='/'>
+                        <MainPage/>
+                    </Route>
+                </Switch>
+            </div>
+        </div>
     </BrowserRouter>
   );
 }
