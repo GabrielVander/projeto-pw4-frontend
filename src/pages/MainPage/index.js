@@ -1,11 +1,11 @@
-import React from "react";
-import "./styles.css";
-import ExampleApp from "../../components/ExampleApp";
+import React from 'react';
+import './styles.css';
+import ExampleApp from '../../components/ExampleApp';
 
 function MainPage() {
-    return (
-        <ExampleApp/>
-    );
+	return (
+		<ExampleApp/>
+	);
 }
 
 export default MainPage;

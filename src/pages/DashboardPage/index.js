@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 import './styles.css';
-import DashboardMenu from "../../components/Dashboard/Menu";
+import DashboardMenu from '../../components/Dashboard/Menu';
 
 function DashboardPage() {
-    return (
-        <>
-            <DashboardMenu/>
-        </>
-    );
+	return (
+		<>
+			<DashboardMenu/>
+		</>
+	);
 }
 
 export default DashboardPage;
