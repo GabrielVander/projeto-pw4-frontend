@@ -1,23 +1,22 @@
-import React, {useState} from "react";
+import React from "react";
 import Card from "react-bootstrap/Card";
 import {BsFolder} from "react-icons/bs";
+import { motion } from "framer-motion"
 
 function ManageWorkspaces() {
-    const [isHovered, setIsHovered] = useState(false);
-
     return (
         <>
-            <Card
-                bg='danger'
-                className={ isHovered ? 'animate__animated animate__pulse' : ''}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+            <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
             >
-                <Card.Header>Manage workspaces</Card.Header>
-                <Card.Body>
-                    <BsFolder size={50}/>
-                </Card.Body>
-            </Card>
+                <Card bg='danger'>
+                    <Card.Header>Manage workspaces</Card.Header>
+                    <Card.Body>
+                        <BsFolder size={50}/>
+                    </Card.Body>
+                </Card>
+            </motion.div>
         </>
     );
 }

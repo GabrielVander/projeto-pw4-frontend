@@ -1,23 +1,22 @@
-import React, {useState} from "react";
+import React from "react";
 import Card from "react-bootstrap/Card";
 import {BsFiles} from "react-icons/bs";
+import { motion } from "framer-motion"
 
 function ViewDocuments() {
-    const [isHovered, setIsHovered] = useState(false);
-
     return (
         <>
-            <Card
-                bg='warning'
-                className={ isHovered ? 'animate__animated animate__pulse' : ''}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+            <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
             >
-                <Card.Header>View documents</Card.Header>
-                <Card.Body>
-                    <BsFiles size={50} />
-                </Card.Body>
-            </Card>
+                <Card bg='warning'>
+                    <Card.Header>View documents</Card.Header>
+                    <Card.Body>
+                        <BsFiles size={50} />
+                    </Card.Body>
+                </Card>
+            </motion.div>
         </>
     );
 }

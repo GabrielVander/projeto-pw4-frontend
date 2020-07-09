@@ -1,23 +1,22 @@
-import React, {useState} from "react";
+import React from "react";
 import Card from "react-bootstrap/Card";
 import {BsFileEarmarkPlus} from "react-icons/bs";
+import { motion } from "framer-motion"
 
 function NewDocument() {
-    const [isHovered, setIsHovered] = useState(false);
-
     return (
         <>
-            <Card
-                bg='success'
-                className={ isHovered ? 'animate__animated animate__pulse' : ''}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+            <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
             >
-                <Card.Header>New document</Card.Header>
-                <Card.Body>
-                    <BsFileEarmarkPlus size={50} />
-                </Card.Body>
-            </Card>
+                <Card bg='success'>
+                    <Card.Header>New document</Card.Header>
+                    <Card.Body>
+                        <BsFileEarmarkPlus size={50} />
+                    </Card.Body>
+                </Card>
+            </motion.div>
         </>
     );
 }
