@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import MainPage from "./pages/MainPage";
+import DashboardPage from "./pages/DashboardPage";
 
 function App() {
   return (
@@ -11,6 +12,9 @@ function App() {
                 <Switch>
                     <Route exact path='/'>
                         <MainPage/>
+                    </Route>
+                    <Route path='/dashboard'>
+                        <DashboardPage />
                     </Route>
                 </Switch>
             </div>
