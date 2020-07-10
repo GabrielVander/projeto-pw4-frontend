@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import {BsFiles} from 'react-icons/bs';
+import './styles.css';
 import { motion } from 'framer-motion';
 import {useHistory} from 'react-router-dom';
 
