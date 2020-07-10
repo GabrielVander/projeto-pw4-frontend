@@ -3,6 +3,7 @@ import './App.css';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import DashboardPage from './pages/DashboardPage';
+import NotFoundPage from './pages/404Page';
 
 function App() {
 	return (
@@ -15,6 +16,9 @@ function App() {
 						</Route>
 						<Route path='/dashboard'>
 							<DashboardPage />
+						</Route>
+						<Route path='*'>
+							<NotFoundPage/>
 						</Route>
 					</Switch>
 				</div>
