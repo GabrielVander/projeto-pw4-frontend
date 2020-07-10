@@ -9,7 +9,7 @@ function NotFoundPage() {
 			<p>
 				It looks like you&apos;re lost...
 			</p>
-			<img src={imgView} alt='logo'/>
+			<img src={imgView} alt='fixed alt text in the 404 page'/>
 			<br/>
 			<p>
 				<Link to='/dashboard'> Go to Home </Link>
