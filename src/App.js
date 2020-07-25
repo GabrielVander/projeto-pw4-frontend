@@ -4,6 +4,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import MainPage from './pages/Others/MainPage';
 import MainDashboardPage from './pages/Dashboard/MainDashboardPage';
 import NotFoundPage from './pages/Others/404Page';
+import NewDocumentPage from './pages/Documents/NewDocumentPage';
 
 function App() {
 	return (
@@ -16,6 +17,9 @@ function App() {
 						</Route>
 						<Route path='/dashboard'>
 							<MainDashboardPage />
+						</Route>
+						<Route path='/documents/new'>
+							<NewDocumentPage />
 						</Route>
 						<Route path='*'>
 							<NotFoundPage/>
