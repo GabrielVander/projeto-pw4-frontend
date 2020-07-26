@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import MainPage from './pages/MainPage';
-import DashboardPage from './pages/DashboardPage';
-import NotFoundPage from './pages/404Page';
+import MainPage from './pages/Others/MainPage';
+import MainDashboardPage from './pages/Dashboard/MainDashboardPage';
+import NotFoundPage from './pages/Others/404Page';
+import NewDocumentPage from './pages/Documents/NewDocumentPage';
 
 function App() {
 	return (
@@ -15,7 +16,10 @@ function App() {
 							<MainPage/>
 						</Route>
 						<Route path='/dashboard'>
-							<DashboardPage />
+							<MainDashboardPage />
+						</Route>
+						<Route path='/documents/new'>
+							<NewDocumentPage />
 						</Route>
 						<Route path='*'>
 							<NotFoundPage/>

@@ -1,0 +1,13 @@
+.form {
+    width: 80%;
+}
+
+.wrapper {
+    padding: 1vw;
+}
+
+.toast-container {
+    position: fixed;
+    bottom: 1vh;
+    float: unset;
+}

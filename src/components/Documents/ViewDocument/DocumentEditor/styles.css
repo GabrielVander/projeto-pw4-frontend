@@ -1,0 +1,14 @@
+.main-container {
+    border-style: solid;
+    border-radius: calc(5px + 2vmin);
+    padding: calc(5px + 2vmin);
+}
+
+.editor {
+    min-height: 70vh;
+}
+
+.toolbar {
+    background-color: transparent;
+    color: black;
+}
