@@ -3,11 +3,11 @@ import {EditorState, ContentState} from 'draft-js';
 import PropTypes from 'prop-types';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import './styles.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Document from '../../../../model/Document';
+import './styles.css';
 
 function DocumentEditor({ document, readOnly }) {
 	const newDocument = document === null;
