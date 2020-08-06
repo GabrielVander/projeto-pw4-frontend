@@ -1,10 +1,10 @@
 import React from 'react';
 import UserForm from '../../components/User/FormComponent';
 
-function newRegisterPage(){
+function NewRegisterPage(){
     return(
         <UserForm mode = "register"/>
     )
 }
 
-export default newRegisterPage;
+export default NewRegisterPage;
