@@ -20,10 +20,10 @@ function App() {
 							<MainPage/>
 						</Route>
 						<Route path='/dashboard'>
-							<MainDashboardPage />
+							<MainDashboardPage/>
 						</Route>
 						<Route path='/documents/new'>
-							<NewDocumentPage />
+							<NewDocumentPage/>
 						</Route>
 						<Route path='/user/loginPage'>
 							<NewLoginPage/>
