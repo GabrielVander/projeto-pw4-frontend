@@ -1,0 +1,24 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.edit-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.flowCard {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.flowTitle {
+    font-size: 32px;
+}

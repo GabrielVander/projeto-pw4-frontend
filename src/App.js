@@ -10,6 +10,9 @@ import NewLoginPage from './pages/User/loginPage';
 import NewRegisterPage from './pages/User/registerPage';
 import NewEmailConfirmationPage from './pages/User/emailConfirmationPage';
 
+import FlowManagement from './pages/Flow/FlowsManagement';
+import FlowBoard from './pages/Flow/FlowBoard';
+
 function App() {
 	return (
 		<BrowserRouter>
@@ -33,6 +36,14 @@ function App() {
 						</Route>
 						<Route path='/user/emailConfirmationPage'>
 							<NewEmailConfirmationPage/>
+						</Route>
+						<Route 
+							path='/flow/flowManagement' 
+							render={(props) => <FlowManagement {...props}/>}>
+						</Route>
+						<Route 
+							path='/flow/flowBoard/:name' 
+							render={(props) => <FlowBoard {...props}/>}>
 						</Route>
 						<Route path='*'>
 							<NotFoundPage/>
