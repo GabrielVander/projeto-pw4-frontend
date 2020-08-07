@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import MainPage from './pages/Others/MainPage';
+import Workspace from './pages/Workspace/WorkspaceList';
 import MainDashboardPage from './pages/Dashboard/MainDashboardPage';
 import NotFoundPage from './pages/Others/404Page';
 import NewDocumentPage from './pages/Documents/NewDocumentPage';
@@ -18,6 +19,9 @@ function App() {
 					<Switch>
 						<Route exact path='/'>
 							<MainPage/>
+						</Route>
+						<Route path='/workspace'>
+							<Workspace/>
 						</Route>
 						<Route path='/dashboard'>
 							<MainDashboardPage/>
