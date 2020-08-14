@@ -11,6 +11,10 @@
     align-items: center;
 }
 
+.edit-button:hover {
+    cursor: pointer;
+}
+
 .flowCard {
     display: flex;
     flex-direction: row;
@@ -19,6 +23,22 @@
     width: 100%;
 }
 
+.flowCard:hover{
+    cursor: pointer;
+}
+
+.addFlowCard {
+    margin-bottom: 8
+}
+
+.addFlowCard:hover{
+    cursor: pointer;
+}
+
 .flowTitle {
+    flex: 1;
+    text-align: left;
     font-size: 32px;
+    color: #343a40;
+    font-weight: bold;
 }
