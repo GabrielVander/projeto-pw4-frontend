@@ -20,7 +20,7 @@ function App() {
 						<Route exact path='/'>
 							<MainPage/>
 						</Route>
-						<Route path='/workspace'>
+						<Route path='/workspaces'>
 							<Workspace/>
 						</Route>
 						<Route path='/dashboard'>

@@ -14,10 +14,10 @@ function WorkspaceItem(props) {
 				whileHover={{ scale: 1.1 }}
 				whileTap={{ scale: 0.9 }}
 			>
-				<Card bg='primary' onClick={() => history.push('/flows')}>
+				<Card bg='primary' onClick={() => history.push('/loginPage')>
 					<Card.Header>{props.name}</Card.Header>
 					<Card.Body>
-						<BsGrid1X2 size={50} />
+						<BsGrid1X2 size={100} />
 					</Card.Body>
 				</Card>
 			</motion.div>
