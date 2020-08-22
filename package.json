@@ -43,6 +43,5 @@
   },
   "devDependencies": {
     "prop-types": "^15.7.2"
-  },
-  "proxy": "https://pw4-project-api-dev.herokuapp.com/"
+  }
 }

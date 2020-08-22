@@ -10,16 +10,29 @@ import PropTypes from 'prop-types';
 import DocumentEditor from './DocumentEditor';
 import Document from '../../../model/Document';
 import {DOCUMENT_SAVED} from '../../../topics/documents';
+import axios from 'axios';
 import './styles.css';
+import {API_ENDPOINT} from '../../../const';
+import {useHistory} from 'react-router-dom';
+import {ContentState, EditorState} from 'draft-js';
 
 const TOAST_DELAY_IN_MILLISECONDS = 3000;
 
-function ViewDocument({ document, editable }) {
+function ViewDocument({document, editable}) {
 	const newDocument = document === null;
+
+	const initialEditorState = newDocument ?
+		EditorState.createEmpty() :
+		EditorState.createWithContent(
+			ContentState.createFromText(document.content)
+		);
+
+	const history = useHistory();
 
 	const [documentTitle, setDocumentTitle] = useState(newDocument ? 'Untitled document' : document.title);
 	const [isSaving, setIsSaving] = useState(false);
 	const [showToast, setShowToast] = useState(false);
+	const [editorState, setEditorState] = useState(initialEditorState);
 
 	useEffect(() => {
 		PubSub.subscribe(DOCUMENT_SAVED, onDocumentSaved);
@@ -27,7 +40,16 @@ function ViewDocument({ document, editable }) {
 
 	function save() {
 		setIsSaving(true);
-		setTimeout(() => PubSub.publish(DOCUMENT_SAVED), 2000);
+		console.log(documentTitle);
+		axios
+			.post(`${API_ENDPOINT}/documents`, {
+				title: documentTitle,
+				content: editorState.getCurrentContent().getPlainText(),
+			})
+			.then(response => {
+				PubSub.publish(DOCUMENT_SAVED);
+				history.push(`/documents/${response.data._id}`);
+			});
 	}
 
 	function onDocumentSaved() {
@@ -44,11 +66,11 @@ function ViewDocument({ document, editable }) {
 							type="text"
 							readOnly={!editable}
 							defaultValue={documentTitle}
-							onChange={(target) => setDocumentTitle(target.value)}
+							onChange={(event) => setDocumentTitle(event.target.value)}
 						/>
 						<InputGroup.Append>
 							<InputGroup.Text>
-									.txt
+                                .txt
 							</InputGroup.Text>
 							<Button disabled={!editable || isSaving} onClick={save}>{
 								isSaving ? 'Saving...' : 'Save'
@@ -61,14 +83,18 @@ function ViewDocument({ document, editable }) {
 			<Form className="form">
 				<Form.Row>
 					<Col>
-						<DocumentEditor document={document} readOnly={!editable}/>
+						<DocumentEditor
+							editorState={editorState}
+							onEditorStateChange={setEditorState}
+							readOnly={!editable}/>
 					</Col>
 				</Form.Row>
 			</Form>
 			<div className="toast-container">
-				<Toast onClose={() => setShowToast(false)} show={showToast} delay={TOAST_DELAY_IN_MILLISECONDS} autohide>
+				<Toast onClose={() => setShowToast(false)} show={showToast} delay={TOAST_DELAY_IN_MILLISECONDS}
+					autohide>
 					<Toast.Header>
-						Document saved
+                        Document saved
 					</Toast.Header>
 				</Toast>
 			</div>
