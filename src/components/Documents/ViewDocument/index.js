@@ -45,8 +45,7 @@ function ViewDocument({document, editable}) {
 				content: editorState.getCurrentContent().getPlainText(),
 			})
 			.then(response => {
-				PubSub.publish(DOCUMENT_SAVED);
-				history.push(`/documents/${response.data._id}`);
+				PubSub.publish(DOCUMENT_SAVED, response.data._id);
 			});
 	}
 
@@ -64,9 +63,10 @@ function ViewDocument({document, editable}) {
 		isNewDocument ? newDocument() : updateDocument();
 	}
 
-	function onDocumentSaved() {
+	function onDocumentSaved(documentId) {
 		setIsSaving(false);
 		setShowToast(true);
+		history.push(`/documents/${documentId}`);
 	}
 
 	return (
