@@ -5,7 +5,6 @@ import MainPage from './pages/Others/MainPage';
 import MainDashboardPage from './pages/Dashboard/MainDashboardPage';
 import NotFoundPage from './pages/Others/404Page';
 import NewDocumentPage from './pages/Documents/NewDocumentPage';
-// User Pages Imports
 import NewLoginPage from './pages/User/loginPage';
 import NewRegisterPage from './pages/User/registerPage';
 import NewEmailConfirmationPage from './pages/User/emailConfirmationPage';
