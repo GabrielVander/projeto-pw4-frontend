@@ -19,9 +19,9 @@ import {ContentState, EditorState} from 'draft-js';
 const TOAST_DELAY_IN_MILLISECONDS = 3000;
 
 function ViewDocument({document, editable}) {
-	const newDocument = document === null;
+	const isNewDocument = document === null;
 
-	const initialEditorState = newDocument ?
+	const initialEditorState = isNewDocument ?
 		EditorState.createEmpty() :
 		EditorState.createWithContent(
 			ContentState.createFromText(document.content)
@@ -29,7 +29,7 @@ function ViewDocument({document, editable}) {
 
 	const history = useHistory();
 
-	const [documentTitle, setDocumentTitle] = useState(newDocument ? 'Untitled document' : document.title);
+	const [documentTitle, setDocumentTitle] = useState(isNewDocument ? 'Untitled document' : document.title);
 	const [isSaving, setIsSaving] = useState(false);
 	const [showToast, setShowToast] = useState(false);
 	const [editorState, setEditorState] = useState(initialEditorState);
@@ -38,9 +38,7 @@ function ViewDocument({document, editable}) {
 		PubSub.subscribe(DOCUMENT_SAVED, onDocumentSaved);
 	});
 
-	function save() {
-		setIsSaving(true);
-		console.log(documentTitle);
+	function newDocument() {
 		axios
 			.post(`${API_ENDPOINT}/documents`, {
 				title: documentTitle,
@@ -50,6 +48,20 @@ function ViewDocument({document, editable}) {
 				PubSub.publish(DOCUMENT_SAVED);
 				history.push(`/documents/${response.data._id}`);
 			});
+	}
+
+	function updateDocument() {
+		axios
+			.put(`${API_ENDPOINT}/documents/${document.id}`, {
+				title: documentTitle,
+				content: editorState.getCurrentContent().getPlainText(),
+			})
+			.then(result => result);
+	}
+
+	function save() {
+		setIsSaving(true);
+		isNewDocument ? newDocument() : updateDocument();
 	}
 
 	function onDocumentSaved() {
