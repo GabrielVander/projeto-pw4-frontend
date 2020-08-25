@@ -14,7 +14,7 @@ function WorkspaceItem(props) {
 				whileHover={{ scale: 1.1 }}
 				whileTap={{ scale: 0.9 }}
 			>
-				<Card bg='primary' onClick={() => history.push('/loginPage')>
+				<Card bg='primary' onClick={() => history.push('/dashboard')}>
 					<Card.Header>{props.name}</Card.Header>
 					<Card.Body>
 						<BsGrid1X2 size={100} />
