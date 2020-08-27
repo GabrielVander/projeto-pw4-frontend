@@ -7,13 +7,15 @@ import {API_ENDPOINT} from '../../../const';
 
 import './styles.css';
 import Document from '../../../model/Document';
+import Spinner from 'react-bootstrap/Spinner';
 
 function ViewDocumentPage(props) {
 
 	const [document, setDocument] = useState(null);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		if(document == null) axios.get(`${API_ENDPOINT}/documents/${props.match.params.documentId}`)
+		if (document == null && loading) axios.get(`${API_ENDPOINT}/documents/${props.match.params.documentId}`)
 			.then(response => {
 				setDocument(
 					new Document(
@@ -22,6 +24,7 @@ function ViewDocumentPage(props) {
 						response.data.content
 					)
 				);
+				setLoading(false);
 			})
 			.catch(err => {
 				console.log(err);
@@ -31,7 +34,7 @@ function ViewDocumentPage(props) {
 
 	return (
 		<>
-			{ document && <ViewDocument document={document} />}
+			{loading ? <Spinner animation="border" role="status"/> : document && <ViewDocument document={document}/>}
 		</>
 	);
 }
