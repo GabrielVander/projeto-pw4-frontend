@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+
 import MainPage from './pages/Others/MainPage';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import Workspace from './pages/Workspace/WorkspaceList';
@@ -12,7 +13,6 @@ import AllDocumentsPage from './pages/Documents/AllDocumentsPage';
 import NewLoginPage from './pages/User/loginPage';
 import NewRegisterPage from './pages/User/registerPage';
 import NewEmailConfirmationPage from './pages/User/emailConfirmationPage';
-
 
 function App() {
 	return (
