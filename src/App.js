@@ -1,12 +1,8 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
-
-import MainPage from './pages/Others/MainPage';
-import NotFoundPage from './pages/Others/404Page';
-
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import MainDashboardPage from './pages/Dashboard/MainDashboardPage';
-
+import NotFoundPage from './pages/Others/404Page';
 import NewDocumentPage from './pages/Documents/NewDocumentPage';
 import ViewDocumentPage from './pages/Documents/ViewDocumentPage';
 import AllDocumentsPage from './pages/Documents/AllDocumentsPage';
@@ -23,7 +19,7 @@ function App() {
 				<div className="App-header">
 					<Switch>
 						<Route exact path='/'>
-							<MainPage/>
+							<Redirect to={'/dashboard'}/>
 						</Route>
 						<Route path='/dashboard'>
 							<MainDashboardPage/>
