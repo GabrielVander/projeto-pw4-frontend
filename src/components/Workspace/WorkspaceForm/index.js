@@ -5,7 +5,7 @@ import {RiSave3Line, RiCloseLine} from 'react-icons/ri';
 import useForm from "../useForm";
 
 function WorkspaceForm(props) {
-    const {values, handleChange, handleSubmit} = useForm(props.handleSubmit);
+    const {handleChange, handleSubmit} = useForm(props.handleSubmit);
 
     return (
         <form onSubmit={handleSubmit}>

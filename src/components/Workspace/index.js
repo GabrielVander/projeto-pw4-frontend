@@ -27,14 +27,13 @@ function ViewWorkspace() {
 		return workspaces
 	}
 
-	const renderWorkspaces = () => {
-		getWorkspaces().then((workspaces) => {
+	const renderWorkspaces = async () => {
+		await getWorkspaces().then((workspaces) => {
 			setWorkspaceList(workspaces);
 		});
 	}
 
 	const handleDelete = async (e) => {
-		console.log("delete")
 		let workspaceId = e.currentTarget.id;
 		await axios
 			.delete(`${API_ENDPOINT}/workspaces/${workspaceId}`);
@@ -44,8 +43,6 @@ function ViewWorkspace() {
 	}
 
 	const handleWillUpdate = (e) => {
-		console.log("update")
-
 		let workspaceId = e.currentTarget.id;
 		setIsUpdating({status: true, id: workspaceId})
 	}
@@ -103,7 +100,7 @@ function ViewWorkspace() {
 							return (
 								<div className="workspace-item-container" key={index}>
 									{
-											(isUpdating.status && isUpdating.id == workspaceItem._id)
+											(isUpdating.status && isUpdating.id === workspaceItem._id)
 												?   ""
 												:	<div className="icon-container"  >
 														<div id={workspaceItem._id} onClick={(e) => handleDelete(e)}>
@@ -120,7 +117,7 @@ function ViewWorkspace() {
 									}
 									{/* <WorkspaceItem name={workspaceItem.name} /> */}
 										{
-											(isUpdating.status && isUpdating.id == workspaceItem._id)
+											(isUpdating.status && isUpdating.id === workspaceItem._id)
 												?   <WorkspaceForm
 														handleSubmit={handleSubmitUpd}
 														handleCancel={handleCancelUpd} />
@@ -147,7 +144,7 @@ function ViewWorkspace() {
 					<Card className="workspace-card" bg="dark">
 						<Card.Body className="new-workspace-card">
 							{
-								(isAdding == false)
+								(isAdding === false)
 									? <div onClick={addWorkspace}>
 										<IconContext.Provider
 											value={{
