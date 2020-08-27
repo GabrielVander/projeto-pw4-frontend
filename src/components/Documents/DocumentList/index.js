@@ -12,6 +12,9 @@ function DocumentList() {
 	axios.get(`${API_ENDPOINT}/documents`)
 		.then(response => {
 			setDocuments(response.data);
+		})
+		.catch(err => {
+			console.log(err);
 		});
 
 	const history = useHistory();
