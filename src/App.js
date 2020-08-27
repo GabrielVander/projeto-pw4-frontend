@@ -4,9 +4,13 @@ import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import MainDashboardPage from './pages/Dashboard/MainDashboardPage';
 import NotFoundPage from './pages/Others/404Page';
 import NewDocumentPage from './pages/Documents/NewDocumentPage';
+import ViewDocumentPage from './pages/Documents/ViewDocumentPage';
+import AllDocumentsPage from './pages/Documents/AllDocumentsPage';
+
 import NewLoginPage from './pages/User/loginPage';
 import NewRegisterPage from './pages/User/registerPage';
 import NewEmailConfirmationPage from './pages/User/emailConfirmationPage';
+
 
 function App() {
 	return (
@@ -31,6 +35,10 @@ function App() {
 						</Route>
 						<Route path='/user/emailConfirmationPage'>
 							<NewEmailConfirmationPage/>
+						</Route>
+						<Route path='/documents/:documentId' component={ViewDocumentPage} />
+						<Route path='/documents'>
+							<AllDocumentsPage />
 						</Route>
 						<Route path='*'>
 							<NotFoundPage/>
