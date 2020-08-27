@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import MainPage from './pages/Others/MainPage';
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import Workspace from './pages/Workspace/WorkspaceList';
 import MainDashboardPage from './pages/Dashboard/MainDashboardPage';
 import NotFoundPage from './pages/Others/404Page';
@@ -17,7 +17,7 @@ function App() {
 				<div className="App-header">
 					<Switch>
 						<Route exact path='/'>
-							<MainPage/>
+							<Redirect to={'/dashboard'}/>
 						</Route>
 						<Route path='/workspaces'>
 							<Workspace/>
