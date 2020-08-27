@@ -55,7 +55,9 @@ function ViewDocument({document, editable}) {
 				title: documentTitle,
 				content: editorState.getCurrentContent().getPlainText(),
 			})
-			.then(result => result);
+			.then(result => {
+				PubSub.publish(DOCUMENT_SAVED, result.data._id);
+			});
 	}
 
 	function save() {
@@ -63,7 +65,7 @@ function ViewDocument({document, editable}) {
 		isNewDocument ? newDocument() : updateDocument();
 	}
 
-	function onDocumentSaved(documentId) {
+	function onDocumentSaved(message, documentId) {
 		setIsSaving(false);
 		setShowToast(true);
 		history.push(`/documents/${documentId}`);
@@ -78,6 +80,7 @@ function ViewDocument({document, editable}) {
 							type="text"
 							readOnly={!editable}
 							defaultValue={documentTitle}
+							disabled={isSaving}
 							onChange={(event) => setDocumentTitle(event.target.value)}
 						/>
 						<InputGroup.Append>
@@ -98,6 +101,7 @@ function ViewDocument({document, editable}) {
 						<DocumentEditor
 							editorState={editorState}
 							onEditorStateChange={setEditorState}
+							disabled={isSaving}
 							readOnly={!editable}/>
 					</Col>
 				</Form.Row>
