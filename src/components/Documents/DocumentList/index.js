@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import ListGroup from 'react-bootstrap/ListGroup';
+import axios from 'axios';
 
-import Document from '../../../model/Document';
+import API_ENDPOINT from '../../../const/index';
 
-function DocumentList({ documents }) {
+function DocumentList() {
+
+	const [documents, setDocuments] = useState([]);
+
+	axios.get(`${API_ENDPOINT}/documents`)
+		.then(response => {
+			setDocuments(response.data);
+		});
 
 	const history = useHistory();
-
+	
 	return (
 		<>
 			<h2 className='document-list-title'>All Documents</h2>
@@ -23,13 +30,5 @@ function DocumentList({ documents }) {
 		</>
 	);
 }
-
-DocumentList.propTypes = {
-	documents: PropTypes.arrayOf(Document),
-};
-
-DocumentList.defaultProps = {
-	documents: null,
-};
 
 export default DocumentList;

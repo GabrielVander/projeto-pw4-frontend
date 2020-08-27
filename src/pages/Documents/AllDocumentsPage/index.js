@@ -1,18 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import DocumentList from '../../../components/Documents/DocumentList';
 import './styles.css';
 
-function AllDocumentsPage ({ documents }) {
+function AllDocumentsPage () {
 	return (
 		<>
-			<DocumentList documents={documents}/>
+			<DocumentList />
 		</>
 	);
 }
-
-AllDocumentsPage.propTypes = {
-	documents: PropTypes.arrayOf(Document),
-};
 
 export default AllDocumentsPage;
