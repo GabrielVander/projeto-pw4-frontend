@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import ListGroup from 'react-bootstrap/ListGroup';
 import axios from 'axios';
 
-import API_ENDPOINT from '../../../const/index';
+import API_ENDPOINT from '../../../const/';
 
 function DocumentList() {
 
