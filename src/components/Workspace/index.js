@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import CardDeck from 'react-bootstrap/CardDeck';
 // import WorkspaceItem from './WorkspaceItem';
 import WorkspaceForm from "./WorkspaceForm";
@@ -16,30 +16,18 @@ import axios from 'axios';
 
 function ViewWorkspace() {
 	const [workspaceList, setWorkspaceList] = useState({});
-	const [isAdding, setIsAdding] = useState(false);
+	const [isAdding, setIsAdding] = useState({status: false});
 	const [isUpdating, setIsUpdating] = useState({status: false});
+	const [isDeleting, setIsDeleting] = useState({status: false});
 	const history = useHistory();
-
-	const getWorkspaces = async () => {
-		let workspaces = await axios
-			.get(`${API_ENDPOINT}/workspaces/`);
-
-		return workspaces
-	}
-
-	const renderWorkspaces = async () => {
-		await getWorkspaces().then((workspaces) => {
-			setWorkspaceList(workspaces);
-		});
-	}
 
 	const handleDelete = async (e) => {
 		let workspaceId = e.currentTarget.id;
+
+		setIsDeleting({status: true, id: workspaceId});
 		await axios
 			.delete(`${API_ENDPOINT}/workspaces/${workspaceId}`);
-
-		renderWorkspaces();
-		return true;
+		setIsDeleting({status: true})
 	}
 
 	const handleWillUpdate = (e) => {
@@ -52,12 +40,8 @@ function ViewWorkspace() {
 		PubSub.subscribe(WORKSPACE_SELECTED, props);
 	}
 
-    const toggle = useCallback(() => {
-        setIsAdding(!isAdding)
-    }, [isAdding, setIsAdding]);
-
     function handleCancelAdd() {
-        toggle();
+		setIsAdding({status: false})
 	}
 	
 	function handleCancelUpd(){
@@ -65,26 +49,27 @@ function ViewWorkspace() {
 	}
 
     function addWorkspace() {
-        toggle();
+		setIsAdding({status: true})
     }
 
     async function handleSubmitAdd(values) {
         await axios
 			.post(`${API_ENDPOINT}/workspaces`, values);
-		toggle();
-		renderWorkspaces();
+		setIsAdding({status: false})
 	}
 	
 	async function handleSubmitUpd(values) {
         await axios
 			.put(`${API_ENDPOINT}/workspaces/${isUpdating.id}`, values);
 		setIsUpdating({status: false});
-		renderWorkspaces();
     }
 
 	useEffect(() => {
-		renderWorkspaces();
-	}, [])
+		axios.get(`${API_ENDPOINT}/workspaces/`).then((workspaces) => {
+			setWorkspaceList(workspaces);
+		});
+
+	}, [isUpdating, isAdding, isDeleting])
 
 	return (
 		<>
@@ -115,28 +100,26 @@ function ViewWorkspace() {
 														</div>
 													</div>
 									}
-									{/* <WorkspaceItem name={workspaceItem.name} /> */}
-										{
-											(isUpdating.status && isUpdating.id === workspaceItem._id)
-												?   <WorkspaceForm
-														handleSubmit={handleSubmitUpd}
-														handleCancel={handleCancelUpd} />
+									{
+										(isUpdating.status && isUpdating.id === workspaceItem._id)
+											?   <WorkspaceForm
+													handleSubmit={handleSubmitUpd}
+													handleCancel={handleCancelUpd} />
 
-												:	<Card className="workspace-card" bg="secondary" onClick={(e) => handleSelect(workspaceItem)}>
-														<Card.Header>
-															{workspaceItem.name}
-														</Card.Header>
-														<Card.Body>
-															<BsGrid1X2 size={100} />
-														</Card.Body>
-													</Card>
-										}
+											:	<Card className="workspace-card" bg="secondary" onClick={(e) => handleSelect(workspaceItem)}>
+													<Card.Header>
+														{workspaceItem.name}
+													</Card.Header>
+													<Card.Body>
+														<BsGrid1X2 size={100} />
+													</Card.Body>
+												</Card>
+									}
 								</div>
 							)
 						})
 						: "Loading..."
 				}
-				{/* <WorkspaceNew></WorkspaceNew> */}
 
 				<motion.div whileHover={{
 					scale: 1.1
@@ -144,7 +127,7 @@ function ViewWorkspace() {
 					<Card className="workspace-card" bg="dark">
 						<Card.Body className="new-workspace-card">
 							{
-								(isAdding === false)
+								(isAdding.status === false)
 									? <div onClick={addWorkspace}>
 										<IconContext.Provider
 											value={{
