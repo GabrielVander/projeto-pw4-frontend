@@ -10,29 +10,65 @@ import PropTypes from 'prop-types';
 import DocumentEditor from './DocumentEditor';
 import Document from '../../../model/Document';
 import {DOCUMENT_SAVED} from '../../../topics/documents';
+import axios from 'axios';
 import './styles.css';
+import {API_ENDPOINT} from '../../../const';
+import {useHistory} from 'react-router-dom';
+import {ContentState, EditorState} from 'draft-js';
 
 const TOAST_DELAY_IN_MILLISECONDS = 3000;
 
-function ViewDocument({ document, editable }) {
-	const newDocument = document === null;
+function ViewDocument({document, editable}) {
+	const isNewDocument = document === null;
 
-	const [documentTitle, setDocumentTitle] = useState(newDocument ? 'Untitled document' : document.title);
+	const initialEditorState = isNewDocument ?
+		EditorState.createEmpty() :
+		EditorState.createWithContent(
+			ContentState.createFromText(document.content)
+		);
+
+	const history = useHistory();
+
+	const [documentTitle, setDocumentTitle] = useState(isNewDocument ? 'Untitled document' : document.title);
 	const [isSaving, setIsSaving] = useState(false);
 	const [showToast, setShowToast] = useState(false);
+	const [editorState, setEditorState] = useState(initialEditorState);
 
 	useEffect(() => {
 		PubSub.subscribe(DOCUMENT_SAVED, onDocumentSaved);
 	});
 
-	function save() {
-		setIsSaving(true);
-		setTimeout(() => PubSub.publish(DOCUMENT_SAVED), 2000);
+	function newDocument() {
+		axios
+			.post(`${API_ENDPOINT}/documents`, {
+				title: documentTitle,
+				content: editorState.getCurrentContent().getPlainText(),
+			})
+			.then(response => {
+				PubSub.publish(DOCUMENT_SAVED, response.data._id);
+			});
 	}
 
-	function onDocumentSaved() {
+	function updateDocument() {
+		axios
+			.put(`${API_ENDPOINT}/documents/${document.id}`, {
+				title: documentTitle,
+				content: editorState.getCurrentContent().getPlainText(),
+			})
+			.then(result => {
+				PubSub.publish(DOCUMENT_SAVED, result.data._id);
+			});
+	}
+
+	function save() {
+		setIsSaving(true);
+		isNewDocument ? newDocument() : updateDocument();
+	}
+
+	function onDocumentSaved(message, documentId) {
 		setIsSaving(false);
 		setShowToast(true);
+		history.push(`/documents/${documentId}`);
 	}
 
 	return (
@@ -44,11 +80,12 @@ function ViewDocument({ document, editable }) {
 							type="text"
 							readOnly={!editable}
 							defaultValue={documentTitle}
-							onChange={(target) => setDocumentTitle(target.value)}
+							disabled={isSaving}
+							onChange={(event) => setDocumentTitle(event.target.value)}
 						/>
 						<InputGroup.Append>
 							<InputGroup.Text>
-									.txt
+                                .txt
 							</InputGroup.Text>
 							<Button disabled={!editable || isSaving} onClick={save}>{
 								isSaving ? 'Saving...' : 'Save'
@@ -61,14 +98,19 @@ function ViewDocument({ document, editable }) {
 			<Form className="form">
 				<Form.Row>
 					<Col>
-						<DocumentEditor document={document} readOnly={!editable}/>
+						<DocumentEditor
+							editorState={editorState}
+							onEditorStateChange={setEditorState}
+							disabled={isSaving}
+							readOnly={!editable}/>
 					</Col>
 				</Form.Row>
 			</Form>
 			<div className="toast-container">
-				<Toast onClose={() => setShowToast(false)} show={showToast} delay={TOAST_DELAY_IN_MILLISECONDS} autohide>
+				<Toast onClose={() => setShowToast(false)} show={showToast} delay={TOAST_DELAY_IN_MILLISECONDS}
+					autohide>
 					<Toast.Header>
-						Document saved
+                        Document saved
 					</Toast.Header>
 				</Toast>
 			</div>

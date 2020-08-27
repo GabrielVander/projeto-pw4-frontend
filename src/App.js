@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import MainPage from './pages/Others/MainPage';
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import MainDashboardPage from './pages/Dashboard/MainDashboardPage';
 import NotFoundPage from './pages/Others/404Page';
 import NewDocumentPage from './pages/Documents/NewDocumentPage';
-// User Pages Imports
+import ViewDocumentPage from './pages/Documents/ViewDocumentPage';
+import AllDocumentsPage from './pages/Documents/AllDocumentsPage';
+
 import NewLoginPage from './pages/User/loginPage';
 import NewRegisterPage from './pages/User/registerPage';
 import NewEmailConfirmationPage from './pages/User/emailConfirmationPage';
@@ -20,7 +21,7 @@ function App() {
 				<div className="App-header">
 					<Switch>
 						<Route exact path='/'>
-							<MainPage/>
+							<Redirect to={'/dashboard'}/>
 						</Route>
 						<Route path='/dashboard'>
 							<MainDashboardPage/>
@@ -37,12 +38,16 @@ function App() {
 						<Route path='/user/emailConfirmationPage'>
 							<NewEmailConfirmationPage/>
 						</Route>
-						<Route 
-							path='/flow/flowManagement' 
+						<Route path='/documents/:documentId' component={ViewDocumentPage} />
+						<Route path='/documents'>
+							<AllDocumentsPage />
+						</Route>
+						<Route
+							path='/flow/flowManagement'
 							render={(props) => <FlowManagement {...props}/>}>
 						</Route>
-						<Route 
-							path='/flow/flowBoard/:name' 
+						<Route
+							path='/flow/flowBoard/:name'
 							render={(props) => <FlowBoard {...props}/>}>
 						</Route>
 						<Route path='*'>

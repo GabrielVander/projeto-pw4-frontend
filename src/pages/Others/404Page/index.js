@@ -12,7 +12,7 @@ function NotFoundPage() {
 			<img src={imgView} alt='404 illustration'/>
 			<br/>
 			<p>
-				<Link to='/dashboard'> Go to Home </Link>
+				<Link to='/'> Go to Home </Link>
 			</p>
 		</>
 	); 
