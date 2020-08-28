@@ -78,7 +78,7 @@ class FlowManagement extends Component {
     const { action, flows } = this.state;
     return (
       <div className="container">
-        <div className="header">
+        <div className="custom-header">
           <p>
             <Link to="/dashboard"> Go back </Link>
           </p>

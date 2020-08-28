@@ -175,7 +175,7 @@ class FlowBoard extends Component {
     const { modalState, states } = this.state;
     return (
       <div class="container">
-        <div class="header">
+        <div class="custom-header">
           <p>
             <Link to="/flow/flowManagement"> Go back </Link>
           </p>
