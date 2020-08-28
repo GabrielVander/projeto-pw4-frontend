@@ -1,0 +1,41 @@
+.workspace-card{
+    cursor: pointer;
+}
+
+.workspace-item-container{
+    position: relative;
+}
+
+.delete-workspace-icon{
+    cursor: pointer;
+
+    position: absolute;
+    top: -8px;
+    right: 8px;
+    z-index: 1;
+    margin-left: 10px;
+    transition: all .2s ease-in-out;
+}
+
+.update-workspace-icon{
+    cursor: pointer;
+
+    position: absolute;
+    top: -8px;
+    right: 30px;
+    z-index: 1;
+    margin-left: 10px;
+    transition: all .2s ease-in-out;
+}
+
+.delete-workspace-icon:hover{
+    transform: scale(1.1);
+}
+
+.new-workspace-card{
+    height: 190px;
+    width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
