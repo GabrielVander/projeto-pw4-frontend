@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+
+import MainPage from './pages/Others/MainPage';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import Workspace from './pages/Workspace/WorkspaceList';
 import MainDashboardPage from './pages/Dashboard/MainDashboardPage';
