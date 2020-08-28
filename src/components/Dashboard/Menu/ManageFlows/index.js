@@ -14,7 +14,7 @@ function ManageFlows() {
 				whileHover={{ scale: 1.1 }}
 				whileTap={{ scale: 0.9 }}
 			>
-				<Card bg='primary' onClick={() => history.push('/flows')}>
+				<Card bg='primary' onClick={() => history.push('/flow/flowManagement')}>
 					<Card.Header>Manage flows</Card.Header>
 					<Card.Body>
 						<BsGrid1X2 size={50} />

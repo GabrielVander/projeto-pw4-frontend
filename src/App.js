@@ -1,7 +1,5 @@
 import React from 'react';
 import './App.css';
-
-import MainPage from './pages/Others/MainPage';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import Workspace from './pages/Workspace/WorkspaceList';
 import MainDashboardPage from './pages/Dashboard/MainDashboardPage';
@@ -13,6 +11,9 @@ import AllDocumentsPage from './pages/Documents/AllDocumentsPage';
 import NewLoginPage from './pages/User/loginPage';
 import NewRegisterPage from './pages/User/registerPage';
 import NewEmailConfirmationPage from './pages/User/emailConfirmationPage';
+
+import FlowManagement from './pages/Flow/FlowsManagement';
+import FlowBoard from './pages/Flow/FlowBoard';
 
 function App() {
 	return (
@@ -44,6 +45,14 @@ function App() {
 						<Route path='/documents/:documentId' component={ViewDocumentPage} />
 						<Route path='/documents'>
 							<AllDocumentsPage />
+						</Route>
+						<Route
+							path='/flow/flowManagement'
+							render={(props) => <FlowManagement {...props}/>}>
+						</Route>
+						<Route
+							path='/flow/flowBoard/:name'
+							render={(props) => <FlowBoard {...props}/>}>
 						</Route>
 						<Route path='*'>
 							<NotFoundPage/>
