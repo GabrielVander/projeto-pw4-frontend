@@ -1,0 +1,55 @@
+.container {
+    height: 100%
+}
+
+.board-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.state-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.state-title {
+    margin-bottom: 32px;
+}
+
+.vertical-divider {
+    margin-right: 16px;
+    margin-left: 16px;
+    height: 720px;
+    width: 1px;
+    background-color: #FFF !important;
+}
+
+.card {
+    width: 90%;
+    margin-bottom: 16px;
+}
+
+.card:hover {
+    cursor: pointer;
+}
+
+.card-title { 
+    color: #343a40; 
+    text-align: left; 
+    margin-left: 8px;
+    margin-top: 8px; 
+}
+
+.card-description {
+    font-size: 14px;
+    font-weight: 100;
+    color: #343a40; 
+    text-align: left; 
+    margin-left: 8px;
+    margin-bottom: 16px;
+}
