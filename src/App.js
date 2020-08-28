@@ -1,26 +1,67 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
+import Workspace from './pages/Workspace/WorkspaceList';
+import MainDashboardPage from './pages/Dashboard/MainDashboardPage';
+import NotFoundPage from './pages/Others/404Page';
+import NewDocumentPage from './pages/Documents/NewDocumentPage';
+import ViewDocumentPage from './pages/Documents/ViewDocumentPage';
+import AllDocumentsPage from './pages/Documents/AllDocumentsPage';
+
+import NewLoginPage from './pages/User/loginPage';
+import NewRegisterPage from './pages/User/registerPage';
+import NewEmailConfirmationPage from './pages/User/emailConfirmationPage';
+
+import FlowManagement from './pages/Flow/FlowsManagement';
+import FlowBoard from './pages/Flow/FlowBoard';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<BrowserRouter>
+			<div className="App">
+				<div className="App-header">
+					<Switch>
+						<Route exact path='/'>
+							<Redirect to={'/dashboard'}/>
+						</Route>
+						<Route path='/workspaces'>
+							<Workspace/>
+						</Route>
+						<Route path='/dashboard'>
+							<MainDashboardPage/>
+						</Route>
+						<Route path='/documents/new'>
+							<NewDocumentPage/>
+						</Route>
+						<Route path='/user/loginPage'>
+							<NewLoginPage/>
+						</Route>
+						<Route path='/user/registerPage'>
+							<NewRegisterPage/>
+						</Route>
+						<Route path='/user/emailConfirmationPage'>
+							<NewEmailConfirmationPage/>
+						</Route>
+						<Route path='/documents/:documentId' component={ViewDocumentPage} />
+						<Route path='/documents'>
+							<AllDocumentsPage />
+						</Route>
+						<Route
+							path='/flow/flowManagement'
+							render={(props) => <FlowManagement {...props}/>}>
+						</Route>
+						<Route
+							path='/flow/flowBoard/:name'
+							render={(props) => <FlowBoard {...props}/>}>
+						</Route>
+						<Route path='*'>
+							<NotFoundPage/>
+						</Route>
+					</Switch>
+				</div>
+			</div>
+		</BrowserRouter>
+	);
 }
 
 export default App;

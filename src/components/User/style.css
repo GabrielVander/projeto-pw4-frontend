@@ -1,0 +1,73 @@
+/** Os seletores seguintes são usados no componente EmailComponent */
+.emailForm{
+    background-color: greenyellow;
+
+    border-style: solid;
+    border-width: 3pt;
+    border-radius: 40pt;
+    
+    position: absolute;
+    left: 31.5%;
+    top: 30%;
+
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 2%;
+    padding-bottom: 3%;
+}
+
+.emailSubmitButton{
+    font-size: large;
+
+    border-style: solid;
+    border-radius: 30pt;
+
+
+    margin-left: 40%;
+    margin-top: 20%;
+}
+
+/** Os seletores seguintes são usados no componente FormComponent */
+
+.formForm{
+    background-color: greenyellow;
+
+    border-style: solid;
+    border-width: 3pt;
+    border-radius: 40pt;
+    
+    position: absolute;
+    left: 37%;
+    top: 30%;
+
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 2%;
+    padding-bottom: 3%;
+}
+
+.formSubmitButton{
+    font-size: large;
+
+    border-style: solid;
+    border-radius: 30pt;
+
+
+    margin-left: 32%;
+    margin-top: 20%;
+}
+
+.formRow{
+    margin: 10pt;
+}
+
+
+.formTitle{
+    margin: auto;
+    margin-bottom: 30%;
+    
+}
+
+
+
+
